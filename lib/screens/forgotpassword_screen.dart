@@ -1,30 +1,43 @@
-import 'package:firebase_example/screens/forgotpassword_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
-class SignInScreen extends StatefulWidget {
-  final VoidCallback showSignUpScreen;
-  const SignInScreen({super.key, required this.showSignUpScreen});
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim());
-  }
 
   @override
   void dispose() {
     _emailController.dispose();
-    _passwordController.dispose();
     super.dispose();
+  }
+
+  Future passwordReset() async {
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: _emailController.text.trim());
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              content: Text("Password reset link sent! Check your inbox."),
+            );
+          });
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text(e.message.toString()),
+            );
+          });
+    }
   }
 
   @override
@@ -50,13 +63,21 @@ class _SignInScreenState extends State<SignInScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "Welcome\nBack",
+              "Reset Your\nPassword",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 40,
                   fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 40),
+            Text(
+              "Enter your email to get a link for to reset your password",
+              style: TextStyle(
+                  color: Colors.white.withOpacity(0.7),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 20),
             TextField(
               controller: _emailController,
               style: const TextStyle(
@@ -69,33 +90,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   hintText: "Email",
                   hintStyle: TextStyle(color: Colors.white.withOpacity(0.4))),
             ),
-            const Divider(
-              height: 3,
-              color: Colors.white,
-            ),
-            TextField(
-              obscureText: true,
-              controller: _passwordController,
-              style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.w700),
-              cursorColor: Colors.white.withOpacity(0.5),
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  filled: true,
-                  hintText: "Password",
-                  hintStyle: TextStyle(color: Colors.white.withOpacity(0.4))),
-            ),
-            TextButton(
-                onPressed: widget.showSignUpScreen,
-                child: const Text(
-                  "Create an account",
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                )),
+            const SizedBox(height: 30),
             InkWell(
-              onTap: () {
-                signIn();
-              },
+              onTap: passwordReset,
               child: Container(
                 height: 50,
                 width: double.maxFinite,
@@ -105,7 +102,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 child: const Center(
                   child: Text(
-                    "SIGN IN",
+                    "SEND LINK",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -114,23 +111,6 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
             ),
-            Center(
-              child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) =>
-                                const ForgotPasswordScreen())));
-                  },
-                  child: Text(
-                    "Forgot password?",
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(0.8),
-                      fontSize: 12,
-                    ),
-                  )),
-            )
           ],
         ),
       ),
