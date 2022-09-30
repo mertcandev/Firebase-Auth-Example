@@ -43,11 +43,10 @@
 ## About The Project
 
 <div>
-This app demonstrates to Sign In, Sign Up and Sign Out functions using Firebase Auth.
+This app demonstrates to Sign In, Sign Up and Sign Out functions and CRUD operations using Firebase Auth.
    <br />
   
   </div>
-
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -65,13 +64,13 @@ This app demonstrates to Sign In, Sign Up and Sign Out functions using Firebase 
 
 <div align="center">
   <a href="https://github.com/mertcandev/firebase_example">
-    <img src="screenshots/ss1.png" alt="Screenshot" width="250" height="500">
-    <img src="screenshots/ss2.png" alt="Screenshot" width="250" height="500">
-    <img src="screenshots/ss3.png" alt="Screenshot" width="250" height="500">
+    <img src="screenshots/ss1.png" alt="Screenshot" width="200" height="400">
+    <img src="screenshots/ss2.png" alt="Screenshot" width="200" height="400">
+    <img src="screenshots/ss3.png" alt="Screenshot" width="200" height="400">
     </br>
-    <img src="screenshots/ss4.png" alt="Screenshot" width="250" height="500">
-    <img src="screenshots/ss5.png" alt="Screenshot" width="250" height="500">
-    <img src="screenshots/ss6.png" alt="Screenshot" width="250" height="500">
+    <img src="screenshots/ss4.png" alt="Screenshot" width="200" height="400">
+    <img src="screenshots/ss5.png" alt="Screenshot" width="200" height="400">
+    <img src="screenshots/ss6.png" alt="Screenshot" width="200" height="400">
   </a>
   </div>
 
