@@ -79,9 +79,11 @@ This app demonstrates to Sign In, Sign Up and Sign Out functions using Firebase 
   <a href="https://github.com/mertcandev/firebase_example">
     <img src="screenshots/ss1.png" alt="Screenshot" width="300" height="600">
     <img src="screenshots/ss2.png" alt="Screenshot" width="300" height="600">
+    <img src="screenshots/ss3.png" alt="Screenshot" width="300" height="600">
     </br>
     <img src="screenshots/ss4.png" alt="Screenshot" width="300" height="600">
     <img src="screenshots/ss5.png" alt="Screenshot" width="300" height="600">
+    <img src="screenshots/ss6.png" alt="Screenshot" width="300" height="600">
   </a>
   </div>
 

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final user = FirebaseAuth.instance.currentUser!;
+
+  List<String> docIDs = [];
+
+  Future getDocIDs() async {
+    await FirebaseFirestore.instance
+        .collection("new_users")
+        .get()
+        .then((snapshot) => snapshot.docs.forEach((document) {
+              print(document.reference);
+              docIDs.add(document.reference.id);
+            }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +88,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-              )
+              ),
+              /* Expanded(
+                  child: FutureBuilder(
+                future: getDocIDs(),
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                      itemCount: docIDs.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                            textColor: Colors.white,
+                            
+                            title: GetUserName(documentID: docIDs[index]));
+                      });
+                },
+              )) */
             ],
           ),
         ),
